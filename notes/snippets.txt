@@ -1,0 +1,58 @@
+
+
+/*
+
+    // ACMP registers
+
+    // 0 - [DMA] - 0 - [RISING INTERUPT] - [FALLING INTERUPT] - [RISE FLAG] - [FALL FLAG] - [ANALOG COMP OUTPUT]
+    int ACMP_STATUS_CONTROL_REGISTERS[3] = {
+        CMP1_SCR,
+        CMP2_SCR,
+        CMP3_SCR};
+
+    // 0 - [FILTER_CNT] - 0 - 0 -[HYSTCTR]
+    int ACMP_CONTROL_REGISTER_0[3] = {
+        CMP1_CR0,
+        CMP2_CR0,
+        CMP3_CR0};
+
+    // [SE] - [WE] - [x] - [PMODE] - [INVERT] - [COS] - [OPE] - [EN]
+    int ACMP_CONTROL_REGISTER_1[3] = {
+        CMP1_CR1,
+        CMP2_CR1,
+        CMP3_CR1};
+
+    // disable 0x00
+    int ACMP_DAC_CONTROL_REGISTER[3] = {
+        CMP1_DACCR,
+        CMP2_DACCR,
+        CMP3_DACCR};
+
+    Specifies the sampling period, in bus clock cycles, of the comparator output filter, when CR1[SE]=0.
+     Setting FILT_PER to 0x0 disables the filter.
+    int ACMP_FILTER_PERIOD_REGISTER[3] = {
+        CMP1_FPR,
+        CMP2_FPR,
+        CMP3_FPR};
+
+
+
+    [0] - 0 - [PSEL] - [MSEL]
+    0 - 0 - [x - x - x] - [x - x - x]
+
+    MSEL / PSEL
+      000 IN0
+      001 IN1
+      010 IN2
+      011 IN3
+      100 IN4
+      101 IN5
+      110 IN6
+      111 IN7
+
+   int ACMP_MUX[3] = {
+       CMP1_MUXCR,
+       CMP2_MUXCR,
+       CMP3_MUXCR
+   };
+*/
