@@ -32,12 +32,20 @@ void ESC::debounce(volatile uint8_t &CMPSCRRegister)
 // handleZeroCrossing
 void ESC::acmp1_isr(){
     // debounce(CMP1_SCR); not gonna work because static
+    // get instance 
+    ESC instance = ESC::get_instance();
+    instance.debounce(CMP1_SCR);
+    // wait to trigger zero cross
 };
 void ESC::acmp2_isr(){
-
+    ESC instance = ESC::get_instance();
+    instance.debounce(CMP2_SCR);
+    // wait to trigger zero cross
 };
 void ESC::acmp3_isr(){
-
+    ESC instance = ESC::get_instance();
+    instance.debounce(CMP3_SCR);
+    // wait to trigger zero cross
 };
 
 void ESC::initACMP()

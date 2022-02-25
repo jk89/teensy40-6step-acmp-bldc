@@ -18,7 +18,6 @@ struct PinState
 class ESC
 {
 private:
-
     inline static constexpr PinState antiClockwisePinState[] = {
         {PHASE_C, PHASE_B, PHASE_A, RISING},
         {PHASE_C, PHASE_A, PHASE_B, FALLING},
@@ -35,15 +34,14 @@ private:
         {PHASE_C, PHASE_A, PHASE_B, RISING},
         {PHASE_C, PHASE_B, PHASE_A, FALLING}};
 
-
     // motor var
-    char MOTOR_POLES;
+    static char MOTOR_POLES;
 
     // system var
-    int PWM_FREQUENCY;
-    char MIN_DUTY;
-    char MAX_DUTY;
-    int DEBOUNCE_DISTANCE;
+    static int PWM_FREQUENCY;
+    static char MIN_DUTY;
+    static char MAX_DUTY;
+    static int DEBOUNCE_DISTANCE;
 
     bool STARTUP_MODE;
     bool LED_EN_ON;
@@ -67,7 +65,7 @@ private:
     float RPM;
 
     // Control
-    bool clockwise;
+    static bool clockwise;
     float ROLL;
     float PITCH;
     char THRUST;
@@ -97,10 +95,17 @@ private:
 
     void debounce(volatile uint8_t &CMPSCRRegister);
 
-
     static void acmp1_isr(void);
     static void acmp2_isr(void);
     static void acmp3_isr(void);
 
 public:
+    static void init() {}
+    static ESC get_instance() {}
+    static bool initialised;
+    //ESC(const ESC &);
+    //ESC(ESC &&);
+    ESC(int arg);
+    // ESC &operator=(const ESC &);
+    // ESC &operator=(ESC &&);
 };
