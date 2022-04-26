@@ -5,7 +5,9 @@
             "includePath": [
                 "${workspaceFolder}/**",
                 "/home/jonathan/teensy_ide/arduino-1.8.15/hardware/teensy/avr/cores/teensy4/",
-                "/home/jonathan/teensy_ide/arduino-1.8.15/hardware/teensy/avr/libraries/ADC"
+                "/home/jonathan/teensy_ide/arduino-1.8.15/hardware/teensy/avr/libraries/ADC",
+                "/home/jonathan/bin/arduino-1.8.19/hardware/teensy/avr/cores/teensy4/",
+                "/home/jonathan/bin/arduino-1.8.19/hardware/teensy/avr/libraries/ADC"
             ],
             "defines": [ "USBCON" ],
             "compilerPath": "/usr/bin/gcc",
