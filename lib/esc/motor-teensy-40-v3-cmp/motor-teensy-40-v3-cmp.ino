@@ -484,6 +484,7 @@ void acmp1_isr(void) {
   }
   // Serial.print(0); Serial.print("\t");
   CMP1_SCR &= 0x00; // turn off A falling or rising
+  asm volatile("dsb");
   // CMP0_CR1 &= 0xBF; // turn off windowing
   delayMicroseconds(delayTime);
   handleZeroCrossing();
@@ -517,6 +518,7 @@ void acmp2_isr(void) {
   }
   // Serial.print(1); Serial.print("\t");
   CMP2_SCR &= 0x00;// turn off B falling or rising
+  asm volatile("dsb");
   // CMP1_CR1 &= 0xBF; // turn off windowing
   delayMicroseconds(delayTime);
   handleZeroCrossing();
@@ -550,6 +552,7 @@ void acmp3_isr(void) {
   // Serial.print(2); Serial.print("\t");
   // turn off C falling or rising
   CMP3_SCR &= 0x00;
+  asm volatile("dsb");
   // CMP2_CR1 &= 0xBF; // turn off windowing
   delayMicroseconds(delayTime);
   handleZeroCrossing();
