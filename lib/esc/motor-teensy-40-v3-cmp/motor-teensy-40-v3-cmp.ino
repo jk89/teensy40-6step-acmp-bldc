@@ -405,6 +405,8 @@ void BEMF_C_FALLING() {
 // 0 - [DMA] - 0 - [RISING INTERUPT] - [FALLING INTERUPT] - [RISE FLAG] - [FALL FLAG] - [ANALOG COMP OUTPUT]
 auto fallingMask = 0B00000000;   // falling flag and interrupt
 auto risingMask =  0B00000001; // rising flag and interrupt
+auto coutHigh = 0x01;
+
 
 /*
  auto fallingMask = 0B00000000;   // falling flag and interrupt
@@ -463,15 +465,21 @@ void acmp1_isr(void) {
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
       // odd means falling
-      if ((CMP1_SCR & fallingMask) != fallingMask) {
+      if (!(CMP1_SCR & coutHigh)) {
         i -= 1;
       }
+      /*if ((CMP1_SCR & fallingMask) != fallingMask) {
+        i -= 1;
+      }*/
     }
     else {
       //rising
-      if ((CMP1_SCR & risingMask) != risingMask) {
+      if (CMP1_SCR & coutHigh) {
         i -= 1;
       }
+      /*if ((CMP1_SCR & risingMask) != risingMask) {
+        i -= 1;
+      }*/
     }
   }
   // Serial.print(0); Serial.print("\t");
@@ -489,15 +497,21 @@ void acmp2_isr(void) {
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
       // odd means falling
-      if ((CMP2_SCR & fallingMask) != fallingMask) {
+      if (!(CMP2_SCR & coutHigh)) {
         i -= 1;
       }
+      /*if ((CMP2_SCR & fallingMask) != fallingMask) {
+        i -= 1;
+      }*/
     }
     else {
       //rising
-      if ((CMP2_SCR & risingMask) != risingMask) {
+      if (CMP2_SCR & coutHigh) {
         i -= 1;
       }
+      /*if ((CMP2_SCR & risingMask) != risingMask) {
+        i -= 1;
+      }*/
     }
     // clear flag
   }
@@ -516,15 +530,21 @@ void acmp3_isr(void) {
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
       // odd means falling
-      if ((CMP3_SCR & fallingMask) != fallingMask) {
+      if (!(CMP3_SCR & coutHigh)) {
         i -= 1;
       }
+      /*if ((CMP3_SCR & fallingMask) != fallingMask) {
+        i -= 1;
+      }*/
     }
     else {
       //rising
-      if ((CMP3_SCR & risingMask) != risingMask) {
+      if (CMP3_SCR & coutHigh) {
         i -= 1;
       }
+      /*if ((CMP3_SCR & risingMask) != risingMask) {
+        i -= 1;
+      }*/
     }
   }
   // Serial.print(2); Serial.print("\t");
