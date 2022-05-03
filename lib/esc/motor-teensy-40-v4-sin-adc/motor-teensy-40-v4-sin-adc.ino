@@ -221,9 +221,9 @@ void initACMP() {
 
   // 0 - [x - x - x] - 0 - 0 - [x - x]
   // 0 - [FILTER_CNT] - 0 - 0 -[HYSTCTR]
-  CMP1_CR0 = 0B00100011; // no filtering 5mV hysteresis
-  CMP2_CR0 = 0B00100011; // no filtering 5mV hysteresis
-  CMP3_CR0 = 0B00100011; // no filtering 5mV hysteresis // 0B01000000
+  CMP1_CR0 = 0B00000011; // no filtering 5mV hysteresis
+  CMP2_CR0 = 0B00000011; // no filtering 5mV hysteresis
+  CMP3_CR0 = 0B00000011; // no filtering 5mV hysteresis // 0B01000000
 
   // 0B01100000
 
@@ -365,7 +365,7 @@ void disableACMPInterrupts() {
 /*
   handleZeroCrossing();
 */
-auto debounceDistance = 165; // 330; // 165 //170 //150; // ;125 // 115
+auto debounceDistance = 10; // 330; // 165 //170 //150; // ;125 // 115
 
 auto delayTime = 0;
 
