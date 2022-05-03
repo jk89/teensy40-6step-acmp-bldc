@@ -133,10 +133,10 @@ void buildTrigTables()
   }
 }
 
-float PITCH = 0.0;
-float ROLL = 0.0;
-byte DUTY_TARGET = MIN_DUTY;
-byte NEXT_DUTY = MIN_DUTY;
+volatile float PITCH = 0.0;
+volatile float ROLL = 0.0;
+volatile byte DUTY_TARGET = MIN_DUTY;
+volatile byte NEXT_DUTY = MIN_DUTY;
 
 
 boolean MODULATED_THRUST_MODE = false;
@@ -153,8 +153,8 @@ struct DATA_W
 // we read 9 bytes in total
 const int SIZE_OF_PROFILE = (SIZE_OF_FLOAT * 2) + 1;
 
-char HOST_PROFILE_BUFFER[SIZE_OF_PROFILE];
-byte HOST_PROFILE_BUFFER_CTR = 0;
+volatile char HOST_PROFILE_BUFFER[SIZE_OF_PROFILE];
+volatile byte HOST_PROFILE_BUFFER_CTR = 0;
 
 bool readHostControlProfile()
 {
