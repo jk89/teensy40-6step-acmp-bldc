@@ -221,9 +221,9 @@ void initACMP() {
 
   // 0 - [x - x - x] - 0 - 0 - [x - x]
   // 0 - [FILTER_CNT] - 0 - 0 -[HYSTCTR]
-  CMP1_CR0 = 0B00000000; // no filtering 5mV hysteresis
-  CMP2_CR0 = 0B00000000; // no filtering 5mV hysteresis
-  CMP3_CR0 = 0B00000000; // no filtering 5mV hysteresis // 0B01000000
+  CMP1_CR0 = 0B00100011; // no filtering 5mV hysteresis
+  CMP2_CR0 = 0B00100011; // no filtering 5mV hysteresis
+  CMP3_CR0 = 0B00100011; // no filtering 5mV hysteresis // 0B01000000
 
   // 0B01100000
 
@@ -331,7 +331,6 @@ this was good with debounce 150
  auto fallingMask = 0B00000010;   // falling flag and interrupt
 auto risingMask =  0B00000101; // rising flag and interrupt
  */
-auto debounceDistance = 160; // 330; // 165 //170 //150; // ;125 // 115
 
 void enableACMPInterrupts() {
   NVIC_ENABLE_IRQ(IRQ_ACMP1);
@@ -366,6 +365,7 @@ void disableACMPInterrupts() {
 /*
   handleZeroCrossing();
 */
+auto debounceDistance = 165; // 330; // 165 //170 //150; // ;125 // 115
 
 auto delayTime = 0;
 
@@ -374,6 +374,9 @@ void acmp1_isr(void) {
     Serial.println("acmp1_isr");
     sei();*/
   STARTUP_MODE = false;
+    CMP1_SCR &= 0x00; // turn off A falling or rising
+  asm volatile("dsb");
+  
   // debounce
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
@@ -396,12 +399,11 @@ void acmp1_isr(void) {
     }
   }
   // Serial.print(0); Serial.print("\t");
-  CMP1_SCR &= 0x00; // turn off A falling or rising
-  asm volatile("dsb");
+
   // CMP0_CR1 &= 0xBF; // turn off windowing
   // delayMicroseconds(delayTime);
-  // handleZeroCrossing();
-  t1.trigger(45); // 
+  handleZeroCrossing();
+
   //     t1.trigger(10'000); // trigger the timer with 10ms delay
 
 
@@ -411,6 +413,8 @@ void acmp2_isr(void) {
     Serial.println("acmp2_isr");
     sei();*/
   STARTUP_MODE = false;
+    CMP2_SCR &= 0x00;// turn off B falling or rising
+  asm volatile("dsb");
   // debounce
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
@@ -434,16 +438,18 @@ void acmp2_isr(void) {
     // clear flag
   }
   // Serial.print(1); Serial.print("\t");
-  CMP2_SCR &= 0x00;// turn off B falling or rising
-  asm volatile("dsb");
+
   // CMP1_CR1 &= 0xBF; // turn off windowing
-  t1.trigger(45);
+  handleZeroCrossing();
 }
 void acmp3_isr(void) {
   /*cli();
     Serial.println("acmp3_isr");
     sei();*/
   STARTUP_MODE = false;
+    CMP3_SCR &= 0x00;
+  asm volatile("dsb");
+  
   // debounce
   for (int i = 0; i < debounceDistance; i++) {
     if (ELECTRICAL_STEP_CTR & 1)  {
@@ -467,10 +473,9 @@ void acmp3_isr(void) {
   }
   // Serial.print(2); Serial.print("\t");
   // turn off C falling or rising
-  CMP3_SCR &= 0x00;
-  asm volatile("dsb");
+
   // CMP2_CR1 &= 0xBF; // turn off windowing
-  t1.trigger(45);
+  handleZeroCrossing();
 }
 
 // END ACMP -----------------------------------------------------------------------------------------------------------
