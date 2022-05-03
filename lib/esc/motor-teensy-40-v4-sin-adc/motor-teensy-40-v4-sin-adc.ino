@@ -331,7 +331,7 @@ this was good with debounce 150
  auto fallingMask = 0B00000010;   // falling flag and interrupt
 auto risingMask =  0B00000101; // rising flag and interrupt
  */
-auto debounceDistance = 323; // 330; // 165 //170 //150; // ;125 // 115
+auto debounceDistance = 160; // 330; // 165 //170 //150; // ;125 // 115
 
 void enableACMPInterrupts() {
   NVIC_ENABLE_IRQ(IRQ_ACMP1);
@@ -399,8 +399,12 @@ void acmp1_isr(void) {
   CMP1_SCR &= 0x00; // turn off A falling or rising
   asm volatile("dsb");
   // CMP0_CR1 &= 0xBF; // turn off windowing
-  delayMicroseconds(delayTime);
-  handleZeroCrossing();
+  // delayMicroseconds(delayTime);
+  // handleZeroCrossing();
+  t1.trigger(45); // 
+  //     t1.trigger(10'000); // trigger the timer with 10ms delay
+
+
 }
 void acmp2_isr(void) {
   /*cli();
@@ -433,8 +437,7 @@ void acmp2_isr(void) {
   CMP2_SCR &= 0x00;// turn off B falling or rising
   asm volatile("dsb");
   // CMP1_CR1 &= 0xBF; // turn off windowing
-  delayMicroseconds(delayTime);
-  handleZeroCrossing();
+  t1.trigger(45);
 }
 void acmp3_isr(void) {
   /*cli();
@@ -467,8 +470,7 @@ void acmp3_isr(void) {
   CMP3_SCR &= 0x00;
   asm volatile("dsb");
   // CMP2_CR1 &= 0xBF; // turn off windowing
-  delayMicroseconds(delayTime);
-  handleZeroCrossing();
+  t1.trigger(45);
 }
 
 // END ACMP -----------------------------------------------------------------------------------------------------------
@@ -842,6 +844,10 @@ void pwmInit()
 
 // END PWM CTRL -----------------------------------------------------------------------------------------------------------
 
+void setupTimers() {
+  t1.begin(handleZeroCrossing);
+}
+
 void setup()
 {
   pinMode(A_IN, OUTPUT);
@@ -868,6 +874,7 @@ void setup()
   analogWrite(C_SD, LOW);
   STARTUP_MODE = true;
   LAST_LOOP_WAS_STARTUP = false;
+  setupTimers();
 }
 
 
