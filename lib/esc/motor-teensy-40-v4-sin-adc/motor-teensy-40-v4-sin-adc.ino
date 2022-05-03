@@ -1,6 +1,9 @@
 #include <Arduino.h>
 #include "imxrt.h"
 
+#include "TeensyTimerTool.h"
+using namespace TeensyTimerTool;
+
 #define PI 3.1415926535897932384626433832795
 
 #define A_IN 2  // A High/low switch
@@ -30,6 +33,9 @@
 #define MOTOR_POLES 14
 #define ELECTRICAL_CYCLES_PER_MECHANICAL_CYCLE (MOTOR_POLES / 2) // per physical revolution
 #define ELECTRICAL_CYCLE_MOD 6
+
+OneShotTimer t1(GPT1);
+PeriodicTimer t2(GPT2);
 
 const float FULL_CYCLE = 2 * PI;
 byte ELECTRICAL_STEP_CTR = 0;
