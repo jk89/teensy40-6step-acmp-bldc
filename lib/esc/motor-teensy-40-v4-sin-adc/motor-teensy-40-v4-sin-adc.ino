@@ -365,7 +365,7 @@ void disableACMPInterrupts() {
 /*
   handleZeroCrossing();
 */
-auto debounceDistance = 10; // 330; // 165 //170 //150; // ;125 // 115
+auto debounceDistance = 60; // 330; // 165 //170 //150; // ;125 // 115
 
 auto delayTime = 1;
 
