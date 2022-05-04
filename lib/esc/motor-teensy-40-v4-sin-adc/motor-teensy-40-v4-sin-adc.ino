@@ -25,7 +25,7 @@ using namespace TeensyTimerTool;
   18: Virtual Neutral
 */
 
-#define PWM_FREQUENCY 32000 // 60k 64000 // 2300// should be 20khz+ 1950 seems to atleast do something.
+#define PWM_FREQUENCY 64000 // 60k 64000 // 2300// should be 20khz+ 1950 seems to atleast do something.
 
 #define MIN_DUTY 60
 #define MAX_DUTY 240
@@ -854,7 +854,7 @@ void pwmInit()
 
 void setupTimers() {
   t1.begin(handleZeroCrossing);
-  t2.begin(logData, 100_Hz);
+  // t2.begin(logData, 100_Hz);
 }
 
 void logData() {
@@ -929,6 +929,8 @@ void loop()
     // Serial.println("got past startup");
 
     enableACMPInterrupts();
+
+    t2.begin(logData, 100_Hz);
 
     // Serial.println("got past enableACMPInterrupts");
     STARTUP_MODE = false;
