@@ -703,6 +703,7 @@ void enforceCommutationState()
       }
       break;
   }
+  asm volatile("dsb");
 }
 
 bool LAST_LOOP_WAS_STARTUP = false;
