@@ -367,7 +367,7 @@ void disableACMPInterrupts() {
 */
 auto debounceDistance = 10; // 330; // 165 //170 //150; // ;125 // 115
 
-auto delayTime = 0;
+auto delayTime = 1;
 
 void acmp1_isr(void) {
   /*cli();
@@ -402,7 +402,8 @@ void acmp1_isr(void) {
 
   // CMP0_CR1 &= 0xBF; // turn off windowing
   // delayMicroseconds(delayTime);
-  handleZeroCrossing();
+  // handleZeroCrossing();
+  t1.trigger(delayTime);
 
   //     t1.trigger(10'000); // trigger the timer with 10ms delay
 
@@ -440,7 +441,8 @@ void acmp2_isr(void) {
   // Serial.print(1); Serial.print("\t");
 
   // CMP1_CR1 &= 0xBF; // turn off windowing
-  handleZeroCrossing();
+  // handleZeroCrossing();
+  t1.trigger(delayTime);
 }
 void acmp3_isr(void) {
   /*cli();
@@ -475,7 +477,8 @@ void acmp3_isr(void) {
   // turn off C falling or rising
 
   // CMP2_CR1 &= 0xBF; // turn off windowing
-  handleZeroCrossing();
+  // handleZeroCrossing();
+  t1.trigger(delayTime);
 }
 
 // END ACMP -----------------------------------------------------------------------------------------------------------
