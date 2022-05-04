@@ -25,7 +25,7 @@ using namespace TeensyTimerTool;
   18: Virtual Neutral
 */
 
-#define PWM_FREQUENCY 64000 // 60k 64000 // 2300// should be 20khz+ 1950 seems to atleast do something.
+#define PWM_FREQUENCY 20000 // 60k 64000 // 2300// should be 20khz+ 1950 seems to atleast do something.
 
 #define MIN_DUTY 60
 #define MAX_DUTY 240
