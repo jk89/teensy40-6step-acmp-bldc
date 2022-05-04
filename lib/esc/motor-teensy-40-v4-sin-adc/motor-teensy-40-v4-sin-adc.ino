@@ -38,10 +38,10 @@ OneShotTimer t1(GPT1);
 PeriodicTimer t2(GPT2);
 
 const float FULL_CYCLE = 2 * PI;
-byte ELECTRICAL_STEP_CTR = 0;
-int MECHANICAL_STEP_CTR = 0;
-int SPEED_STEP_CTR = 0;
-float RPM = 0;
+volatile byte ELECTRICAL_STEP_CTR = 0;
+volatile int MECHANICAL_STEP_CTR = 0;
+volatile int SPEED_STEP_CTR = 0;
+volatile float RPM = 0;
 elapsedMicros TIME_SINCE_LAST_MEASUREMENT;
 
 const byte MECHANICAL_CYCLE_MOD = ELECTRICAL_CYCLES_PER_MECHANICAL_CYCLE * ELECTRICAL_CYCLE_MOD;
@@ -65,7 +65,7 @@ float computeSpeed() {
   return rpm;
 }
 
-bool LED_EN_ON = false;
+volatile bool LED_EN_ON = false;
 int LED_STEP_CTR = 0;
 int LED_CYCLE_MOD = 66;
 boolean STARTUP_MODE = true;
@@ -854,6 +854,14 @@ void pwmInit()
 
 void setupTimers() {
   t1.begin(handleZeroCrossing);
+  t2.begin(logData, 100_Hz);
+}
+
+void logData() {
+  noInterrupts();
+  float _RPM = RPM;
+  interrupts();
+  Serial.println(_RPM);
 }
 
 void setup()
