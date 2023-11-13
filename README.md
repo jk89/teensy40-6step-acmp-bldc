@@ -90,10 +90,3 @@ Beyond the obvious of getting the current state working I have the following ide
 - The circuit is begging for some thermal and overdrive current protection 
 
 - The ESC needs better fault protection logic, one should use the elapsed time between cycles to enforce some protection that if elapsed time deviates significantly from sensible values it could indicate that the motor has stalled or is obstructed, in this case current can surge and destroy hardware. Also this could maybe prevent it acting like a Dremel and risking your fingers with a higher kv motor.
-
-# Copyright notice
-
-Copyright Jonathan Kelsey 2021.
-All code distributed with GNU GENERAL PUBLIC LICENSE Version 2.
-The circuit diagram is freely available under MIT license ./images/circuit.png but this is the only file which is under MIT.
-I will definitely consider changing the entire LICENSE to MIT when its working but this is at my discretion.
