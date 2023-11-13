@@ -1,5 +1,5 @@
-# bldc-acmp
-A bldc esc
+# teensy40-6step-acmp-bldc
+A BLDC ESC based off Teensy 4.0 using its ACMP for zero crossing detection.
 
 # Circuit
 
