@@ -5,7 +5,7 @@ A BLDC ESC based off Teensy 4.0 using its ACMP for zero crossing detection.
 
 The circuit is composed of a 3 phase inverter powered by 6 half bridges as well as IR2104 ic drivers which greatly simplifies the control design. BEMF measurements are taken by a voltage divider grid which allows for voltage measurements of the voltage on phase A, B, C phase channels, as well as a common virtual neutral. Zero crossing detection occurs when a phase signal crosses the virtual neutral signal.
 
-You can see the circuit here: [circuit](https://github.com/jk89/bldc-acmp/blob/main/images/circuit.png) or in the [documentation](https://github.com/jk89/bldc-acmp/blob/main/notes/README.pdf)
+You can see the circuit here: [circuit](./images/circuit.png) or in the [documentation](./notes/README.pdf)
 
 # Dependancies
 
